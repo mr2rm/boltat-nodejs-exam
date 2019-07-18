@@ -22,6 +22,10 @@ const todoSchema = mongoose.Schema({
 	_creator: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: true
+	},
+	_assign: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: true
 	}
 });
 
