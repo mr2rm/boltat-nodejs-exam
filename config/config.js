@@ -8,6 +8,7 @@ const config = {
 	isTest: envVars.NODE_ENV === "test",
 	isDevelopment: envVars.NODE_ENV === "development",
 	jwtSecret: envVars.JWT_SECRET,
+	jwtExpire: envVars.JWT_EXPIRE,
 	db: {
 		host: envVars.DB_HOST,
 		port: envVars.DB_PORT,
