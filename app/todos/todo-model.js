@@ -1,28 +1,28 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const todoSchema = mongoose.Schema({
-    text: {
-        type: String,
-        required: [true, 'You should enter some text'],
-        minlength: [5, 'Text should be at least 5 characters'],
-        trim: true,
-    },
-    createDate: {
-        type: String,
-        default: formattedDate(new Date()),
-    },
-    completed: {
-        type: Boolean,
-        default: false,
-    },
-    completedAt: {
-        type: Number,
-        default: null,
-    },
-    _creator: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-    },
+	text: {
+		type: String,
+		required: [true, "You should enter some text"],
+		minlength: [5, "Text should be at least 5 characters"],
+		trim: true
+	},
+	createDate: {
+		type: Date,
+		default: formattedDate(new Date())
+	},
+	completed: {
+		type: Boolean,
+		default: false
+	},
+	completedAt: {
+		type: Date,
+		default: null
+	},
+	_creator: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: true
+	}
 });
 
 function formattedDate(d) {
@@ -35,4 +35,4 @@ function formattedDate(d) {
 
 	return `${month}/${day}/${year}`;
 }
-module.exports = mongoose.model('Todo', todoSchema);
+module.exports = mongoose.model("Todo", todoSchema);
