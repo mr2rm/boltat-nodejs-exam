@@ -1,5 +1,5 @@
-const User = require('./user-model');
-const { ObjectID } = require('mongodb');
+const User = require("./user-model");
+const { ObjectID } = require("mongodb");
 
 exports.getById = async (req, res, next) => {
 	const id = req.params.id;
@@ -14,7 +14,7 @@ exports.getById = async (req, res, next) => {
 		return res.json(user);
 	} catch (err) {
 		return next(err);
-    }
+	}
 };
 
 exports.list = async (req, res, next) => {
@@ -22,8 +22,8 @@ exports.list = async (req, res, next) => {
 		const users = await User.find();
 		return res.json({ users });
 	} catch (e) {
-        return next(e);
-    }
+		return next(e);
+	}
 };
 
 exports.update = async (req, res, next) => {
@@ -33,17 +33,22 @@ exports.update = async (req, res, next) => {
 		return next();
 	}
 	try {
-		const user = await User.findByIdAndUpdate(id, {
-			$set: body,
-		}, {
-			new: true,
-			runValidators: true,
-		});
+		const user = await User.findByIdAndUpdate(
+			id,
+			{
+				$set: body
+			},
+			{
+				new: true,
+				runValidators: true,
+				context: "query"
+			}
+		);
 		if (!user) {
 			return next();
 		}
 		return res.json(user);
-    } catch (err) {
-        return next(err);
-    }
+	} catch (err) {
+		return next(err);
+	}
 };
