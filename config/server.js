@@ -7,6 +7,8 @@ const AppError = require("../app/helpers/AppError");
 
 const app = express();
 
+app.use(bodyParser.json());
+
 // authentication middleware
 app.use(auth.initialize());
 
@@ -24,12 +26,12 @@ app.use((err, req, res, next) => {
 
 // catch 404 and forward
 app.use((req, res, next) => {
-	// TODO
+	return next(new AppError("Not Found", 404));
 });
 
 // error handler
 app.use((err, req, res, next) => {
-	// TODO
+	return next(err);
 });
 
 module.exports = app;

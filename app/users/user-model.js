@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
 const config = require("../../config/config");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -18,12 +19,13 @@ const userSchema = mongoose.Schema({
 	username: {
 		type: String,
 		required: [true, "user name is required"],
+		unique: true,
 		minlength: [4, "user name should contain at least 4 characters"]
 	}
 });
 
 // validations
-// TODO use mongoose schema validation
+userSchema.plugin(uniqueValidator);
 
 // hash password before saving the user
 userSchema.pre("save", async function(next) {
